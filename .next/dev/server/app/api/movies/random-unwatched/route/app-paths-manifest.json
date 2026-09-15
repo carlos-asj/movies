@@ -1,0 +1,3 @@
+{
+  "/api/movies/random-unwatched/route": "app/api/movies/random-unwatched/route.js"
+}
