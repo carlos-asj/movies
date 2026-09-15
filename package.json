@@ -1,0 +1,36 @@
+{
+  "name": "movies",
+  "version": "1.0.0",
+  "description": "Initial file for application",
+  "main": "index.js",
+  "scripts": {
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "prisma skills sync || exit 0",
+    "contract:emit": "prisma contract emit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlos-asj/movies.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/carlos-asj/movies/issues"
+  },
+  "homepage": "https://github.com/carlos-asj/movies#readme",
+  "devDependencies": {
+    "@prisma/cli-engine": "^0.4.0",
+    "@types/node": "^26.5.1",
+    "prisma": "^6.19.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "dotenv": "^17.4.2"
+  }
+}
