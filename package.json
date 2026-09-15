@@ -4,11 +4,17 @@
   "description": "Initial file for application",
   "main": "index.js",
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "prisma skills sync || exit 0",
     "contract:emit": "prisma contract emit"
+  },
+  "prisma": {
+    "seed": "npx tsx prisma/seed.ts"
   },
   "repository": {
     "type": "git",
@@ -17,7 +23,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/carlos-asj/movies/issues"
   },
@@ -25,12 +30,17 @@
   "devDependencies": {
     "@prisma/cli-engine": "^0.4.0",
     "@types/node": "^26.5.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "prisma": "^6.19.3",
     "ts-node": "^10.9.2",
     "typescript": "^7.0.2"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
-    "dotenv": "^17.4.2"
+    "dotenv": "^17.4.2",
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   }
 }
