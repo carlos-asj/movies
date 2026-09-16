@@ -1,0 +1,89 @@
+"use client";
+
+import { useState } from "react";
+
+interface Movie {
+  id: number;
+  title: string;
+  year: number;
+  category: string;
+  posterPath: string | null;
+  overview: string | null;
+}
+
+export function MovieCard({ movie: initialMovie }: { movie: Movie }) {
+  const [movie, setMovie] = useState<Movie | null>(initialMovie);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isShuffling, setIsShuffling] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handlerMarkAsWatched() {
+    if (!movie) return;
+    setIsSaving(true);
+    setError(null);
+
+    try {
+      const res = await fetch(`/api/movies/${movie.id}/watched`, {
+        method: "PATCH",
+      });
+
+      if (!res.ok) throw new Error("Falha ao marcar como assistido");
+
+      await handleShuffle();
+    } catch (Err) {
+      setError("Não foi possível salvar. Tente novamente.");
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
+  async function handleShuffle() {
+    setIsShuffling(true);
+    setError(null);
+
+    try {
+      const res = await fetch("/api/movies/random-unwatched");
+
+      if (res.status === 404) {
+        setMovie(null);
+        return;
+      }
+
+      if (!res.ok) throw new Error("Falha ao buscar filme");
+
+      const nextMovie = await res.json();
+      setMovie(nextMovie);
+    } catch (err) {
+      setError("Não foi possível buscar um novo filme.");
+    } finally {
+      setIsShuffling(false);
+    }
+  }
+
+  if (!movie) {
+    return <p>Todos os filmes foram assistidos!</p>;
+  }
+
+  return (
+    <div>
+      {movie.posterPath && (
+        <img src={movie.posterPath} alt={movie.title} width={200} />
+      )}
+      <h1>
+        {movie.title} ({movie.year})
+      </h1>
+      <p>{movie.category}</p>
+      {movie.overview && <p>{movie.overview}</p>}
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      <button onClick={handlerMarkAsWatched} disabled={isSaving || isShuffling}>
+        {isSaving ? "Salvando..." : "Marcar como assistido"}
+      </button>
+
+      <button onClick={handleShuffle} disabled={isSaving || isShuffling}>
+        {isShuffling ? "Sorteando..." : "Sortear outro"}
+      </button>
+    </div>
+  );
+}

@@ -1,4 +1,4 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/movies/random-unwatched/route": "app/api/movies/random-unwatched/route.js"
+  "/api/movies/random-unwatched/route": "app/api/movies/random-unwatched/route.js",
+  "/page": "app/page.js"
 }
