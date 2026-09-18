@@ -55,7 +55,12 @@ async function fetchMovieDetails(
   const response = await fetch(
     `https://api.oscarbase.com/api/movies/${movieId}`,
   );
-  if (!response.ok) return null;
+  if (!response.ok) {
+    console.warn(
+      `Falha ao buscar detalhes do filme ${movieId}: ${response.status}`,
+    );
+    return null;
+  }
   return response.json();
 }
 
@@ -83,7 +88,7 @@ async function main() {
       },
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 200));
+    await new Promise((resolve) => setTimeout(resolve, 700));
   }
 
   console.log("Seed concluído.");

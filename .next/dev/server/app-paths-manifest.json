@@ -1,4 +1,5 @@
 {
   "/api/movies/random-unwatched/route": "app/api/movies/random-unwatched/route.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/sorteio/page": "app/sorteio/page.js"
 }

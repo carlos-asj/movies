@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ShuffleLoading } from "./ShuffleLoading";
 
 interface Movie {
   id: number;
@@ -64,26 +65,35 @@ export function MovieCard({ movie: initialMovie }: { movie: Movie }) {
     return <p>Todos os filmes foram assistidos!</p>;
   }
 
+  if (isShuffling) {
+    return <ShuffleLoading />;
+  }
+
   return (
-    <div>
+    <div className="flex flex-col justify-center min-h-screen animate-pop-in">
       {movie.posterPath && (
         <img src={movie.posterPath} alt={movie.title} width={200} />
       )}
-      <h1>
-        {movie.title} ({movie.year})
-      </h1>
-      <p>{movie.category}</p>
+      <h1 className="text-center font-bold text-3xl italic">{movie.title}</h1>
+      <span className="text-center text-[#470104] italic">{movie.year}</span>
       {movie.overview && <p>{movie.overview}</p>}
-
       {error && <p style={{ color: "red" }}>{error}</p>}
-
-      <button onClick={handlerMarkAsWatched} disabled={isSaving || isShuffling}>
-        {isSaving ? "Salvando..." : "Marcar como assistido"}
-      </button>
-
-      <button onClick={handleShuffle} disabled={isSaving || isShuffling}>
-        {isShuffling ? "Sorteando..." : "Sortear outro"}
-      </button>
+      <div className="flex flex-col gap-4 mt-4">
+        <button
+          className="py-5 rounded-full mx-10 bg-[#FFA900] text-white text-xl"
+          onClick={handleShuffle}
+          disabled={isSaving || isShuffling}
+        >
+          {isShuffling ? "Sorteando..." : "Sortear outro"}
+        </button>
+        <button
+          className="underline"
+          onClick={handlerMarkAsWatched}
+          disabled={isSaving || isShuffling}
+        >
+          {isSaving ? "Salvando..." : "Marcar como assistido"}
+        </button>
+      </div>
     </div>
   );
 }

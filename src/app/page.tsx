@@ -1,27 +1,18 @@
-import { prisma } from "@/lib/prisma";
-import { MovieCard } from "./components/MovieCard";
+import Link from "next/link";
 
-async function getRandomUnwatchedMovie() {
-  const count = await prisma.movie.count({ where: { watched: false } });
-  if (count === 0) return null;
-
-  const randomIndex = Math.floor(Math.random() * count);
-  return prisma.movie.findFirst({
-    where: { watched: false },
-    skip: randomIndex,
-  });
-}
-
-export default async function Home() {
-  const movie = await getRandomUnwatchedMovie();
-
+export default function Home() {
   return (
-    <main>
-      {movie ? (
-        <MovieCard movie={movie} />
-      ) : (
-        <p>Todos os filmes foram assistidos!</p>
-      )}
+    <main className="flex flex-col items-center justify-center gap-6 p-4 text-center">
+      <h1 className="text-2xl text-[#FFA900]">Noite do Oscar</h1>
+      <div className="">
+        <Link
+          href="/sorteio"
+          className="px-15 py-5 bg-[#FFA900] text-xl rounded-full hover:bg-gray-800 transition
+          inset-shadow-md inset-shadow-black-900"
+        >
+          Sortear filme
+        </Link>
+      </div>
     </main>
   );
 }

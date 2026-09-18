@@ -1,3 +1,11 @@
+import "./globals.css";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Oscar Movies",
+  description: "Sorteie filmes do vencedores do Oscar para assistir",
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body className="bg-[#870007] min-h-screen">{children}</body>
     </html>
   );
 }
