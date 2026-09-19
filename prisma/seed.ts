@@ -24,6 +24,10 @@ interface OscarBaseMovie {
   overview?: string;
 }
 
+interface OscarBaseMovieDetailResponse {
+  data: OscarBaseMovie;
+}
+
 async function fetchAllWinners(): Promise<OscarBaseNomination[]> {
   const allWinners: OscarBaseNomination[] = [];
   let page = 1;
@@ -43,7 +47,7 @@ async function fetchAllWinners(): Promise<OscarBaseNomination[]> {
     hasNextPage = json.pagination.hasNextPage;
     page++;
 
-    await new Promise((resolve) => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 700));
   }
 
   return allWinners;
@@ -61,7 +65,8 @@ async function fetchMovieDetails(
     );
     return null;
   }
-  return response.json();
+  const json: OscarBaseMovieDetailResponse = await response.json();
+  return json.data;
 }
 
 async function main() {
