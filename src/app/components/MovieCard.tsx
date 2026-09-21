@@ -71,12 +71,16 @@ export function MovieCard({ movie: initialMovie }: { movie: Movie }) {
 
   return (
     <div className="flex flex-col justify-center min-h-screen animate-pop-in">
-      {movie.posterPath && (
-        <img src={movie.posterPath} alt={movie.title} width={200} />
-      )}
-      <h1 className="text-center font-bold text-3xl italic">{movie.title}</h1>
+      <div className="flex justify-center mb-4">
+        {movie.posterPath && (
+          <img src={movie.posterPath} alt={movie.title} width={250} />
+        )}
+      </div>
+      <h1 className="text-center font-bold text-3xl text-white italic">
+        {movie.title}
+      </h1>
       <span className="text-center text-[#470104] italic">{movie.year}</span>
-      {movie.overview && <p>{movie.overview}</p>}
+      {movie.overview && <p className="mx-4">{movie.overview}</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
       <div className="flex flex-col gap-4 mt-4">
         <button
@@ -87,7 +91,7 @@ export function MovieCard({ movie: initialMovie }: { movie: Movie }) {
           {isShuffling ? "Sorteando..." : "Sortear outro"}
         </button>
         <button
-          className="underline"
+          className="underline text-xl"
           onClick={handlerMarkAsWatched}
           disabled={isSaving || isShuffling}
         >
