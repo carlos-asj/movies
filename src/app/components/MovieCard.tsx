@@ -80,7 +80,7 @@ export function MovieCard({ movie: initialMovie }: { movie: Movie }) {
         {movie.title}
       </h1>
       <span className="text-center text-[#470104] italic">{movie.year}</span>
-      {movie.overview && <p className="mx-4">{movie.overview}</p>}
+      {movie.overview && <p className="mx-4 text-white">{movie.overview}</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
       <div className="flex flex-col gap-4 mt-4">
         <button
@@ -91,7 +91,7 @@ export function MovieCard({ movie: initialMovie }: { movie: Movie }) {
           {isShuffling ? "Sorteando..." : "Sortear outro"}
         </button>
         <button
-          className="underline text-xl"
+          className="underline text-xl text-white"
           onClick={handlerMarkAsWatched}
           disabled={isSaving || isShuffling}
         >
