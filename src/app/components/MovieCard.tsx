@@ -70,33 +70,44 @@ export function MovieCard({ movie: initialMovie }: { movie: Movie }) {
   }
 
   return (
-    <div className="flex flex-col justify-center min-h-screen animate-pop-in">
-      <div className="flex justify-center mb-4">
-        {movie.posterPath && (
-          <img src={movie.posterPath} alt={movie.title} width={250} />
-        )}
-      </div>
-      <h1 className="text-center font-bold text-3xl text-white italic">
-        {movie.title}
-      </h1>
-      <span className="text-center text-[#470104] italic">{movie.year}</span>
-      {movie.overview && <p className="mx-4 text-white">{movie.overview}</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <div className="flex flex-col gap-4 mt-4">
-        <button
-          className="py-5 rounded-full mx-10 bg-[#FFA900] text-white text-xl"
-          onClick={handleShuffle}
-          disabled={isSaving || isShuffling}
-        >
-          {isShuffling ? "Sorteando..." : "Sortear outro"}
-        </button>
-        <button
-          className="underline text-xl text-white"
-          onClick={handlerMarkAsWatched}
-          disabled={isSaving || isShuffling}
-        >
-          {isSaving ? "Salvando..." : "Marcar como assistido"}
-        </button>
+    <div
+      className="flex flex-col justify-center min-h-screen animate-pop-in
+    "
+    >
+      <div className="border-1 border-[#470104] p-2 text-center rounded-xl mx-4">
+        <div className="flex justify-center mb-4">
+          {movie.posterPath && (
+            <img src={movie.posterPath} alt={movie.title} width={250} />
+          )}
+        </div>
+        <h1 className="text-center font-bold text-3xl text-white italic">
+          {movie.title}
+        </h1>
+        <span className="font-bold text-xl text-[#470104] italic">
+          {movie.year}
+        </span>
+        <div className="text-left p-2 rounded-lg">
+          {movie.overview && (
+            <p className="mx-4 text-white">{movie.overview}</p>
+          )}
+        </div>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <div className="flex flex-col gap-2 mt-4">
+          <button
+            className="py-5 rounded-full mx-10 bg-[#FFA900] text-white text-xl"
+            onClick={handleShuffle}
+            disabled={isSaving || isShuffling}
+          >
+            {isShuffling ? "Sorteando..." : "Sortear outro"}
+          </button>
+          <button
+            className="underline text-xl text-white"
+            onClick={handlerMarkAsWatched}
+            disabled={isSaving || isShuffling}
+          >
+            {isSaving ? "Salvando..." : "Marcar como assistido"}
+          </button>
+        </div>
       </div>
     </div>
   );
